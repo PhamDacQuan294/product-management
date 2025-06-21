@@ -5,14 +5,14 @@ block main
   .container.my-3 
     .row 
       .col-12 
-        +box-head("Danh Sach San Pham")
+        +box-head("Danh sach san pham")
     .row 
-      each item in products
+      each item in products 
         .col-4.mb-3 
           .product-item 
             .inner-image 
               img(
-                scr=item.thumbnail
+                src=item.thumbnail 
                 alt=item.title
               )
             .inner-content 
