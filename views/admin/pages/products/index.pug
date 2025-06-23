@@ -2,6 +2,7 @@ extends ../../layouts/default.pug
 include ../../mixins/filter-status.pug
 include ../../mixins/search.pug
 include ../../mixins/pagination.pug
+include ../../mixins/form-change-multi.pug
 
 block main 
   h1 Danh sach san pham
@@ -18,24 +19,8 @@ block main
   .card.mb-3 
     .card-header Danh sach san pham
       .card-body 
-        form(
-          action=`${prefixAdmin}/products/change-multi?_method=PATCH`
-          method="POST"
-          form-change-multi
-        )
-          .d-flex.align-items-start 
-            .form-group 
-              select(name="type" class="form-control")
-                option(value="active") Hoat dong 
-                option(value="inactive") Dung hoat dong 
-            .form-group 
-              input(
-                type="text"
-                name="ids"
-                value=""
-                class="form-control d-none"
-              )
-            button(type="submit" class="btn btn-primary") Ap dung
+      
+        +form-change-multi(`${prefixAdmin}/products/change-multi?_method=PATCH`)
 
         table(
           class="table table-hover table-sm"
