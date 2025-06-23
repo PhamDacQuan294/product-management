@@ -46,3 +46,20 @@ module.exports.index = async (req, res) => {
     pagination: objectPagination
   });
 }
+
+// [GET] /admin/products/change-status/:status/:id
+module.exports.changeStatus = async (req, res) => {
+  const status = req.params.status;
+  const id = req.params.id;
+  const redirectUrl = req.query.redirect;
+
+  await Product.updateOne({ _id: id }, { status: status });
+  
+  if (redirectUrl) {
+    return res.redirect(redirectUrl);
+  }
+
+  res.redirect("/admin/products");
+}
+
+// req.query là mấy cái sau dấu hỏi chấm
