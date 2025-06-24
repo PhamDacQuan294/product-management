@@ -96,6 +96,7 @@ module.exports.changeMulti = async (req, res) => {
         await Product.updateOne({ _id: id }, {
           position: position
         });
+        req.flash("success", `Da doi vi tri thanh cong ${ids.length} san pham!`);
       }
       break;
     default:
