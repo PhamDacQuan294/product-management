@@ -87,6 +87,7 @@ module.exports.changeMulti = async (req, res) => {
         deleted: true,
         deletedAt: new Date()
       });
+      req.flash("success", `Da xoa thanh cong ${ids.length} san pham!`);
       break;
     case "change-position":
       for (const item of ids) {
@@ -119,9 +120,11 @@ module.exports.deleteItem = async (req, res) => {
     deletedAt: new Date()
   });
 
+  req.flash("success", `Da xoa thanh cong san pham!`);
+
   if (redirectUrl) {
     return res.redirect(redirectUrl);
   }
-
+  
   res.redirect("/admin/products");
 }
