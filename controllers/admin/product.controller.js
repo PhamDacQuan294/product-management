@@ -86,3 +86,16 @@ module.exports.changeMulti = async (req, res) => {
   res.redirect("/admin/products");
 }
 
+// [DELETE] /admin/products/delete/:id
+module.exports.deleteItem = async (req, res) => {
+  const id = req.params.id;
+  const redirectUrl = req.query.redirect;
+
+  await Product.deleteOne({ _id: id});
+
+  if (redirectUrl) {
+    return res.redirect(redirectUrl);
+  }
+
+  res.redirect("/admin/products");
+}
