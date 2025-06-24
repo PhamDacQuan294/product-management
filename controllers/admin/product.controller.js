@@ -91,7 +91,11 @@ module.exports.deleteItem = async (req, res) => {
   const id = req.params.id;
   const redirectUrl = req.query.redirect;
 
-  await Product.deleteOne({ _id: id});
+  // await Product.deleteOne({ _id: id});
+  await Product.updateOne({ _id: id}, { 
+    deleted: true,
+    deletedAt: new Date()
+  });
 
   if (redirectUrl) {
     return res.redirect(redirectUrl);
