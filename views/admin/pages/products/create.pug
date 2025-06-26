@@ -56,7 +56,10 @@ block main
         value="0"
         min="0"
       )
-    div(class="form-group")
+    div(
+      class="form-group"
+      upload-image
+    )
       lable(for="thumbnail") Anh
       input(
         type="file"
@@ -64,6 +67,12 @@ block main
         id="thumbnail"
         name="thumbnail"
         accept="image/*"
+        upload-image-input
+      )
+      img(
+        scr=""
+        upload-image-preview
+        class="image-preview"
       )
     div(class="form-group")
       lable(for="position") Vi tri
