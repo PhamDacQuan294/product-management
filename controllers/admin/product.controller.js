@@ -5,6 +5,7 @@ const systemConfig = require("../../config/system");
 const filterStatusHelper = require("../../helpers/filterStatus");
 const searchHelper = require("../../helpers/search");
 const paginationHelper = require("../../helpers/pagination");
+const redirectHelper = require("../../helpers/redirect");
 
 // [GET] /admin/products
 module.exports.index = async (req, res) => {
@@ -56,24 +57,18 @@ module.exports.index = async (req, res) => {
 module.exports.changeStatus = async (req, res) => {
   const status = req.params.status;
   const id = req.params.id;
-  const redirectUrl = req.query.redirect;
 
   await Product.updateOne({ _id: id }, { status: status });
   
   req.flash("success", "Cap nhat trang thai thanh cong!");
   
-  if (redirectUrl) {
-    return res.redirect(redirectUrl);
-  }
-
-  res.redirect("/admin/products");
+  redirectHelper(req, res, `${systemConfig.prefixAdmin}/products`);
 }
 
 // [PATCH] /admin/products//change-multi
 module.exports.changeMulti = async (req, res) => {
   const type = req.body.type;
   const ids = req.body.ids.split(", ");
-  const redirectUrl = req.query.redirect;
 
   switch (type) {
     case "active":
@@ -105,19 +100,13 @@ module.exports.changeMulti = async (req, res) => {
       break;
   }
 
-  if (redirectUrl) {
-    return res.redirect(redirectUrl);
-  }
-
-  res.redirect("/admin/products");
+  redirectHelper(req, res, `${systemConfig.prefixAdmin}/products`);
 }
 
 // [DELETE] /admin/products/delete/:id
 module.exports.deleteItem = async (req, res) => {
   const id = req.params.id;
-  const redirectUrl = req.query.redirect;
 
-  // await Product.deleteOne({ _id: id});
   await Product.updateOne({ _id: id}, { 
     deleted: true,
     deletedAt: new Date()
@@ -125,11 +114,7 @@ module.exports.deleteItem = async (req, res) => {
 
   req.flash("success", `Da xoa thanh cong san pham!`);
 
-  if (redirectUrl) {
-    return res.redirect(redirectUrl);
-  }
-  
-  res.redirect("/admin/products");
+  redirectHelper(req, res, `${systemConfig.prefixAdmin}/products`);
 }
 
 
