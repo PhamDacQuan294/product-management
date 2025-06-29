@@ -26,26 +26,9 @@ module.exports.create = async (req, res) => {
     deleted: false
   };
 
-  // function createTree(arr, parentId = "") {
-  //   const tree = [];
-  //   arr.forEach((item) => {
-  //     if (item.parent_id === parentId) {
-  //       const newItem = item;
-  //       const children = createTree(arr, item.id);
-  //       if(children.length > 0) {
-  //         newItem.children = children;
-  //       }
-  //       tree.push(newItem);
-  //     }
-  //   });
-  //   return tree;
-  // }
-
   const records = await ProductCategory.find(find);
 
   const newRecords = createTreeHelper.tree(records);
-
-  // const newRecords = createTree(records);
 
   res.render("admin/pages/products-category/create", {
     pageTitle: "Tao danh muc san pham",
