@@ -1,0 +1,31 @@
+extends ../../layouts/default.pug
+
+block main 
+  h1(class="mb-4") Them moi nhom quyen
+
+  form(
+    action=`${prefixAdmin}/roles/create`
+    method="POST"
+  )
+    div(class="form-group")
+      lable(for="title") Tieu de 
+      input(
+        type="text"
+        class="form-control"
+        id="title"
+        name="title"
+        required
+      )
+    div(class="form-group")
+      lable(for="desc") Mo ta
+      input(
+        type="text"
+        class="form-control"
+        id="desc"
+        name="description"
+      )
+    div(class="form-group")
+      button(
+        type="submit"
+        class="btn btn-primary"
+      ) Tao moi
