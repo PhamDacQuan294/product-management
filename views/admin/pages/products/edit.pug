@@ -1,5 +1,6 @@
 extends ../../layouts/default.pug
 include ../../mixins/alert.pug
+include ../../mixins/select-tree.pug
 
 block main 
 
@@ -23,6 +24,16 @@ block main
         name="title"
         value=product.title
       )
+    div(class="form-group")
+      label(for="product_category_id") Danh muc  
+    select(
+      name="product_category_id"
+      id="product_category_id"
+      class="form-control"
+    )
+      option(value="") -- Chon danh muc --
+      if(category) 
+        +select-tree(category, 1, product.product_category_id)
     div(class="form-group")
       lable(for="desc") Mo ta
       textarea(
