@@ -65,4 +65,29 @@ module.exports.editPatch = async (req, res) => {
   res.redirect(`${systemConfig.prefixAdmin}/roles/edit/${id}`);
 }
 
+// [GET] /admin/roles/permissions
+module.exports.permissions = async (req, res) => {
+  let find = {
+    deleted: false
+  };
 
+  const records = await Role.find(find);
+
+  res.render("admin/pages/roles/permissions", {
+    pageTitle: "Phan quyen",
+    records: records
+  });
+}
+
+// [PATCH] /admin/roles/permissions
+module.exports.permissionsPatch = async (req, res) => {
+  const permissions = JSON.parse(req.body.permissions);
+
+  for (const item of permissions) {
+    await Role.updateOne({ _id: item.id }, { permissions: item.permissions });
+  }
+
+  req.flash("success", "Cap nhat phan quyen thanh cong");
+  
+  res.redirect(`${systemConfig.prefixAdmin}/roles/permissions`);
+}
