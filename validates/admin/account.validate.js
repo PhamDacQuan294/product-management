@@ -16,3 +16,19 @@ module.exports.createPost = (req, res, next) => {
 
   next();
 }
+
+module.exports.editPatch = (req, res, next) => {
+  const id = req.params.id;
+
+  if (!req.body.fullName) {
+    req.flash("error", "Vui lòng nhập ho ten!");
+    return res.redirect(`/admin/accounts/edit/${id}`);
+  }
+
+  if (!req.body.email) {
+    req.flash("error", "Vui lòng nhập email!");
+    return res.redirect(`/admin/accounts/edit/${id}`);
+  }
+
+  next();
+}
