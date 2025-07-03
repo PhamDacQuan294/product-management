@@ -1,0 +1,31 @@
+extends ../../layouts/default.pug
+
+block main 
+  h1(class="mb-4") Thong tin ca nhan 
+
+  if (user.avatar)
+    img(src=user.avatar width="150px" class="mb-3")
+  else 
+    img(src="/admin/images/avatar.png" width="150px" class="mb-3")
+
+  if (user.fullName) 
+    p Ho ten: <b>#{user.fullName}</b>
+  
+  if (user.email)
+    p Email: <b>#{user.email}</b>
+  
+  if (user.phone)
+    p So dien thoai: <b>#{user.phone}</b>
+  
+  p 
+    span Trang thai: 
+    span 
+      <b>#{user.status === "active" ? "Hoat dong" : "Dung hoat dong"}</b>
+  
+  if (role.title) 
+    p Phan quyen: <b>#{role.title}</b>
+  
+  a(
+    href=`${prefixAdmin}/my-account/edit`
+    class="btn btn-primary"
+  ) Chinh sua thong tin
