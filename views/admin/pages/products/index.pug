@@ -58,6 +58,7 @@ block main
                 th Vi tri
                 th Trang thai 
                 th Nguoi tao
+                th Nguoi cap nhat
                 th Hanh dong 
             
             tbody 
@@ -118,6 +119,12 @@ block main
                     p #{item.accountFullName}
                     p
                       +formatDate(item.createdBy.createdAt)
+                  td 
+                    - const updatedBy = item.updatedBy.slice(-1)[0];
+                    if(updatedBy)
+                      p #{updatedBy.accountFullName}
+                      p
+                        +formatDateTime(updatedBy.updatedAt)
                   td 
                     a(
                       href=`${prefixAdmin}/products/detail/${item.id}`
