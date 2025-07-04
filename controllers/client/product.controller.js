@@ -19,17 +19,29 @@ module.exports.index = async (req, res) => {
   });
 }
 
-// [GET] /products/:slug
+// [GET] /products/:slugProduct
 module.exports.detail = async (req, res) => {
   try {
     const find = {
       deleted: false,
-      slug: req.params.slug,
+      slug: req.params.slugProduct,
       status: "active"
     };
 
     const product = await Product.findOne(find);
 
+    if(product.product_category_id) {
+      const category = await ProductCategory.findOne({
+        _id: product.product_category_id,
+        status: "active",
+        deleted: false
+      });
+
+      product.category = category;
+    }
+
+    product.priceNew = productsHelper.priceNewProduct(product);
+    
     res.render("client/pages/products/detail", {
       pageTitle: product.title,
       product: product
@@ -46,23 +58,6 @@ module.exports.category = async (req, res) => {
     status: "active",
     deleted: false
   });
-
-  // const getSubCategory = async (parentId) => {
-  //   const subs = await ProductCategory.find({
-  //     parent_id: parentId,
-  //     status: "active",
-  //     deleted: false
-  //   });
-
-  //   let allSub = [...subs];
-
-  //   for (const sub of subs) {
-  //     const childs = await getSubCategory(sub.id);
-  //     allSub = allSub.concat(childs);
-  //   }
-
-  //   return allSub;
-  // }
 
   const listSubCategory = await productsCategoryHelper.getSubCategory(category.id);
 
