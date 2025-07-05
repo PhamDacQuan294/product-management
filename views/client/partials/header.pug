@@ -33,4 +33,6 @@ header.header
               - const pathProduct = "/products";
               a(href=pathProduct) San pham
                 +sub-menu(layoutProductsCategory, pathProduct)
+            li 
+              a(href="/cart") Gio hang (#{miniCart ? miniCart.totalQuantity : 0})
               
