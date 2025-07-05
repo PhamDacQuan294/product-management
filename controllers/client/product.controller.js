@@ -44,7 +44,7 @@ module.exports.detail = async (req, res) => {
     
     res.render("client/pages/products/detail", {
       pageTitle: product.title,
-      product: product
+      product: product,
     });
   } catch (error) {
     res.redirect(`/products`);
