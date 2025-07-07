@@ -35,8 +35,12 @@ header.header
                 +sub-menu(layoutProductsCategory, pathProduct)
             li 
               a(href="/cart") Gio hang (#{miniCart ? miniCart.totalQuantity : 0})
-            li 
-              a(href="/user/login") Dang nhap 
-            li 
-              a(href="/user/register") Dang ky
+            if(user)
+              li 
+                a(href="/user/logout") Dang xuat 
+            else 
+              li 
+                a(href="/user/login") Dang nhap 
+              li 
+                a(href="/user/register") Dang ky
               
