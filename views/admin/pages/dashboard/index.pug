@@ -1,4 +1,56 @@
 extends ../../layouts/default.pug
 
-block main 
-  h1 Trang tong quan
+block main
+  h1 Trang tổng quan
+
+  .row.mt-4
+    .col-12
+      .card.mb-4
+        .card-header Thông tin tài khoản
+        .card-body
+          if (user.avatar)
+            img(
+              src=user.avatar
+              style="height: 100px; margin-bottom: 15px;"
+            )
+          if (user.fullName)
+            p Họ tên: <b>#{user.fullName}</b>
+          if (user.email)
+            p Email: <b>#{user.email}</b>
+          if (user.phone)
+            p Số điện thoại: <b>#{user.phone}</b>
+          if (role.title)
+            p Phân quyền: <b>#{role.title}</b>
+    
+    .col-6 
+      .card.mb-4 
+        .card-header Danh muc san pham 
+        .card-body 
+          p So luong: <b>#{statistic.categoryProduct.total}</b>
+          p Hoat dong: <b>#{statistic.categoryProduct.active}</b>
+          p Dung hoat dong: <b>#{statistic.categoryProduct.inactive}</b>
+    
+    .col-6 
+      .card.mb-4 
+        .card-header San pham 
+        .card-body 
+          p So luong: <b>#{statistic.Product.total}</b>
+          p Hoat dong: <b>#{statistic.Product.active}</b>
+          p Dung hoat dong: <b>#{statistic.Product.inactive}</b>
+    
+    .col-6 
+      .card.mb-4 
+        .card-header Tai khoan admin
+        .card-body 
+          p So luong: <b>5</b>
+          p Hoat dong: <b>3</b>
+          p Dung hoat dong: <b>2</b>
+    
+    .col-6 
+      .card.mb-4 
+        .card-header Tai khoan client
+        .card-body 
+          p So luong: <b>5</b>
+          p Hoat dong: <b>3</b>
+          p Dung hoat dong: <b>2</b>
+
