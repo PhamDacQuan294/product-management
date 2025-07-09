@@ -48,6 +48,16 @@ app.use(express.static(`${__dirname}/public`));
 route(app);
 routeAdmin(app);
 
+// Middleware 404 - route không khớp
+app.use((req, res, next) => {
+  res.status(404).render("client/pages/errors/404", {
+    pageTitle: "404 Not Found",
+  });
+});
+
+
+// * ở đây là các trường hợp còn lại 
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
