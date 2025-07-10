@@ -14,24 +14,26 @@ block main
             .inner-avatar EY 
             .inner-name Em Yeu 
           .inner-body 
-            .inner-incoming 
-              .inner-name Em Yeu 
-              .inner-content 
-                | A oi sang nha e nha, nha e khong co ai o nha ca 
-            .inner-outgoing 
-              .inner-content 
-                | The a? Ok e iu 
-            .inner-incoming 
-              .inner-name Em Yeu 
-              .inner-content 
-                | Nhanh nha nhanh nha 
-            .inner-outgoing
-              .inner-content 
-                | Ck den roi ma thay ai o nha em dau e? Khoa cua ma
-            .inner-incoming 
-              .inner-name Em Yeu 
-              .inner-content 
-                | Thi em bao nha e khong ai o nha ma 
+            each chat in chats
+              div(class=(chat.user_id == user.id ? "inner-outgoing" : "inner-incoming")) 
+                if(chat.user_id != user.id)
+                  .inner-name #{chat.infoUser.fullName}
+                .inner-content 
+                  | #{chat.content}
+            //- .inner-outgoing 
+            //-   .inner-content 
+            //-     | The a? Ok e iu 
+            //- .inner-incoming 
+            //-   .inner-name Em Yeu 
+            //-   .inner-content 
+            //-     | Nhanh nha nhanh nha 
+            //- .inner-outgoing
+            //-   .inner-content 
+            //-     | Ck den roi ma thay ai o nha em dau e? Khoa cua ma
+            //- .inner-incoming 
+            //-   .inner-name Em Yeu 
+            //-   .inner-content 
+            //-     | Thi em bao nha e khong ai o nha ma 
           .inner-foot 
             form(
               class="inner-form"
