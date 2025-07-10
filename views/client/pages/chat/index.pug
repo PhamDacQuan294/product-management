@@ -9,7 +9,7 @@ block main
     
     .row 
       .col-12 
-        .chat 
+        .chat(my-id=user.id)
           //- .inner-head 
             .inner-avatar EY 
             .inner-name Em Yeu 
@@ -20,20 +20,6 @@ block main
                   .inner-name #{chat.infoUser.fullName}
                 .inner-content 
                   | #{chat.content}
-            //- .inner-outgoing 
-            //-   .inner-content 
-            //-     | The a? Ok e iu 
-            //- .inner-incoming 
-            //-   .inner-name Em Yeu 
-            //-   .inner-content 
-            //-     | Nhanh nha nhanh nha 
-            //- .inner-outgoing
-            //-   .inner-content 
-            //-     | Ck den roi ma thay ai o nha em dau e? Khoa cua ma
-            //- .inner-incoming 
-            //-   .inner-name Em Yeu 
-            //-   .inner-content 
-            //-     | Thi em bao nha e khong ai o nha ma 
           .inner-foot 
             form(
               class="inner-form"
