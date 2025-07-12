@@ -73,5 +73,41 @@ module.exports = (res) => {
         });
       }
     });
+
+    // Chức năng từ chối kết bạn
+    socket.on("CLIENT_REFUSE_FRIEND", async (userId) => {
+      const myUserId = res.locals.user.id;
+
+      // console.log(myUserId); // Id của B
+      // console.log(userId); // Id của A
+
+      // Xoá id của A trong acceptFriends của B
+      const existIdAinB = await User.findOne({
+        _id: myUserId,
+        acceptFriends: userId
+      });
+
+      if (existIdAinB) {
+        await User.updateOne({
+          _id: myUserId
+        }, {
+          $pull: { acceptFriends: userId }
+        });
+      }
+
+      // xoá id của B trong requestFriends của A
+      const existIdBinA = await User.findOne({
+        _id: userId,
+        requestFriends: myUserId
+      });
+
+      if (existIdBinA) {
+        await User.updateOne({
+          _id: userId
+        }, {
+          $pull: { requestFriends: myUserId }
+        });
+      }
+    });
   });
 };
