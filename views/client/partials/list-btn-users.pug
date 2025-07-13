@@ -15,4 +15,9 @@
     a(
       class="btn btn-primary m-1"
       href="/users/accept"
-    ) Loi moi ket ban
+    ) 
+      | Loi moi ket ban
+      span(
+        class="badge badge-light"
+        badge-users-accept=user.id
+      ) #{user.acceptFriends.length}
