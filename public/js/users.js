@@ -88,6 +88,7 @@ if (dataUsersAccept) {
       // Vẽ user ra giao diện
       const div = document.createElement("div");
       div.classList.add("col-6");
+      div.setAttribute("user-id", data.infoUserA._id);
 
       div.innerHTML = `
         <div class="box-user">
@@ -125,4 +126,17 @@ if (dataUsersAccept) {
     }
   });
 }
+// End SERVER_RETURN_INFO_ACCEPT_FRIEND
 
+// SERVER_RETURN_USER_ID_CANCEL_FRIEND
+socket.on("SERVER_RETURN_USER_ID_CANCEL_FRIEND", (data) => {
+  const boxUserRemove = document.querySelector(`[user-id='${data.userIdA}']`);
+  if (boxUserRemove) {
+    const dataUsersAccept = document.querySelector("[data-users-accept]");
+    const userIdB = dataUsersAccept.getAttribute("data-users-accept");
+    if(userIdB === data.userIdB) {
+      dataUsersAccept.removeChild(boxUserRemove);
+    }
+  }
+});
+// End SERVER_RETURN_USER_ID_CANCEL_FRIEND
