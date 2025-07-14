@@ -17,7 +17,7 @@ module.exports = (app) => {
   app.use(categoryMiddleware.category);
   app.use(cartMiddleware.cartId);
   app.use(userMiddleware.infoUser);
-   app.use(settingMiddleware.settingGeneral);
+  app.use(settingMiddleware.settingGeneral);
 
   app.use("/", homeRoutes);
 
