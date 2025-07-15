@@ -24,7 +24,7 @@ module.exports.notFriend = async (req, res) => {
       { _id: { $ne: userId } },
       { _id: { $nin: requestFriends } },
       { _id: { $nin: acceptFriends } },
-       { _id: { $nin: friendListId } }
+      { _id: { $nin: friendListId } }
     ],
     status: "active",
     deleted: false  
