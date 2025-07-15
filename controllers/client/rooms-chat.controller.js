@@ -3,8 +3,17 @@ const RoomChat = require("../../models/rooms-chat.model");
 
 // [GET] /rooms-chat
 module.exports.index = async (req, res) => {
+  const userId = res.locals.user.id;
+
+  const listRoomChat = await RoomChat.find({
+    "users.user_id": userId,
+    typeRoom: "group",
+    deleted: false
+  });
+
   res.render("client/pages/rooms-chat/index", {
-    pageTitle: "Danh sach phong"
+    pageTitle: "Danh sach phong",
+    listRoomChat: listRoomChat
   })
 }
 
@@ -30,7 +39,8 @@ module.exports.create = async (req, res) => {
 // [POST] /rooms-chat/create
 module.exports.createPost = async (req, res) => {
   const title = req.body.title;
-  const usersId = req.body.usersId;
+  const rawUsersId = req.body.usersId;
+  const usersId = Array.isArray(rawUsersId) ? rawUsersId : [rawUsersId];
 
   const dataRoom = {
     title: title,
